@@ -22,7 +22,7 @@ Location = st.number_input("Enter Area", min_value=100, max_value=10000, step=50
 if st.button("Predict Price"):
     # Prepare input
     input_df = pd.DataFrame({
-        "Area": [Area],
+        "Area_Yards": [Area],
         "BHK": [BHK],
         "Bathroom": [Bathroom],
         "Location": [Location]
