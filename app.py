@@ -8,10 +8,14 @@ model = pickle.load(open("delhi_price_model.pkl", "rb"))
 st.title("🏠 Delhi House Price Prediction")
 
 # Input fields
-Area = st.number_input("Enter Area (sq ft)", min_value=100, max_value=10000, step=50)
+Area_yards = st.number_input("Enter Area (sq ft)", min_value=100, max_value=10000, step=50)
 BHK = st.number_input("Number of BHK", min_value=1, max_value=10, step=1)
 Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
 Location = st.number_input("Enter Area", min_value=100, max_value=10000, step=50)
+furnishing = st.selectbox("Furnishing", ["Furnished", "Semi-Furnished", "Unfurnished"])
+parking = st.selectbox("Parking", ["Yes", "No"])
+status = st.selectbox("Status", ["Ready to move", "Under construction"])
+
 
 # Dropdown for location
 # location = st.selectbox(
@@ -22,10 +26,14 @@ Location = st.number_input("Enter Area", min_value=100, max_value=10000, step=50
 if st.button("Predict Price"):
     # Prepare input
     input_df = pd.DataFrame({
-        "Area_Yards": [Area],
+        "Area_Yards": [Area_yards],
         "BHK": [BHK],
         "Bathroom": [Bathroom],
-        "Location": [Location]
+        "Location": [Location],
+        "Furnishing":[furnishing],
+        "Parking": [parking],
+        "Status" : [status]
+        
     })
     
     # Predict
