@@ -2,6 +2,28 @@ import streamlit as st
 import pandas as pd
 import pickle
 
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.pipeline import Pipeline
+
+categorical_features = ["Furnishing", "Parking", "Status", "Transaction", "Type", "Locality"]
+numeric_features = ["BHK", "Bathroom", "Area_Yards"]
+
+preprocessor = ColumnTransformer([
+    ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
+    ("num", "passthrough", numeric_features)
+])
+
+pipeline = Pipeline([
+    ("preprocessor", preprocessor),
+    ("model", RandomForestRegressor())
+])
+
+pickle.dump(pipeline, open("delhi_price_model.pkl", "wb"))
+
+
+
 # Load pipeline (preprocessing + model)
 model = pickle.load(open("delhi_price_model.pkl", "rb"))
 
