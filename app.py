@@ -19,7 +19,8 @@ mapping_status = {"Ready to move": 1, "Under construction": 0}
 
 BHK = st.number_input("Number of BHK", min_value=1, max_value=10, step=1)
 # Location = st.number_input("Enter Location", min_value=100, max_value=10000, step=50)
-Location = st.text_input("Enter Locality / Area Name")
+localities = ["Dwarka", "Saket", "Rohini", "Lajpat Nagar", "Vasant Kunj", "Karol Bagh"]
+Location = st.selectbox("Select Location", localities)
 Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
 furnishing = st.selectbox("Furnishing", ["Furnished", "Semi-Furnished", "Unfurnished"])
 parking = st.selectbox("Parking", ["Yes", "No"])
