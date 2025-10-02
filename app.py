@@ -95,7 +95,7 @@ mapping_location = {
 # Input fields
 BHK = st.number_input("Number of BHK", min_value=1, max_value=10, step=1)
 localities = ["Dwarka", "Saket", "Rohini", "Lajpat Nagar", "Vasant Kunj", "Karol Bagh"]
-Location = st.selectbox("Select Location", localities)
+Locality = st.selectbox("Select Location", localities)
 Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
 furnishing = st.selectbox("Furnishing", ["Furnished", "Semi-Furnished", "Unfurnished"])
 parking = st.selectbox("Parking", ["Yes", "No"])
@@ -108,7 +108,7 @@ if st.button("Predict Price"):
         # Prepare input DataFrame (Features must match the model's training features/order)
         input_df = pd.DataFrame({
             "BHK": [BHK],
-            "Location": [mapping_location[Location]],
+            "Location": [mapping_location[Locality]],
             "Bathroom": [Bathroom],
             "Furnishing":[mapping_furnishing[furnishing]],
             "Parking": [mapping_parking[parking]],
