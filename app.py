@@ -108,11 +108,11 @@ if st.button("Predict Price"):
         # Prepare input DataFrame (Features must match the model's training features/order)
         input_df = pd.DataFrame({
             "BHK": [BHK],
+            "Area_Yards": [Area_yards],
             "Location": [mapping_location[Locality]],
             "Bathroom": [Bathroom],
             "Furnishing":[mapping_furnishing[furnishing]],
             "Parking": [mapping_parking[parking]],
-            "Area_Yards": [Area_yards],
             "Status" : [mapping_status[status]]
         })
         
