@@ -10,28 +10,22 @@ st.title("🏠 Delhi House Price Prediction")
 # Input fields
 Area_yards = st.number_input("Enter Area (sq ft)", min_value=100, max_value=10000, step=50)
 BHK = st.number_input("Number of BHK", min_value=1, max_value=10, step=1)
-Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
 Location = st.number_input("Enter Area", min_value=100, max_value=10000, step=50)
+Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
 furnishing = st.selectbox("Furnishing", ["Furnished", "Semi-Furnished", "Unfurnished"])
 parking = st.selectbox("Parking", ["Yes", "No"])
 status = st.selectbox("Status", ["Ready to move", "Under construction"])
 
 
-# Dropdown for location
-# location = st.selectbox(
-#     "Select Location",
-#     ["Delhi", "Noida", "Gurgaon", "Faridabad", "Ghaziabad", "Other"]
-# )
-
 if st.button("Predict Price"):
     # Prepare input
     input_df = pd.DataFrame({
-        "Area_Yards": [Area_yards],
         "BHK": [BHK],
-        "Bathroom": [Bathroom],
         "Location": [Location],
+        "Bathroom": [Bathroom],
         "Furnishing":[furnishing],
         "Parking": [parking],
+        "Area_Yards": [Area_yards],
         "Status" : [status]
         
     })
