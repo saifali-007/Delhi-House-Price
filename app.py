@@ -2,26 +2,6 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.pipeline import Pipeline
-
-categorical_features = ["Furnishing", "Parking", "Status", "Transaction", "Type", "Locality"]
-numeric_features = ["BHK", "Bathroom", "Area_Yards"]
-
-preprocessor = ColumnTransformer([
-    ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
-    ("num", "passthrough", numeric_features)
-])
-
-pipeline = Pipeline([
-    ("preprocessor", preprocessor),
-    ("model", RandomForestRegressor())
-])
-
-pickle.dump(pipeline, open("delhi_price_model.pkl", "wb"))
-
 
 
 # Load pipeline (preprocessing + model)
@@ -29,7 +9,14 @@ model = pickle.load(open("delhi_price_model.pkl", "rb"))
 
 st.title("🏠 Delhi House Price Prediction")
 
+# Categorial values
+mapping_furnishing = {"Furnished": 2, "Semi-Furnished": 1, "Unfurnished": 0}
+mapping_parking = {"Yes": 1, "No": 0}
+mapping_status = {"Ready to move": 1, "Under construction": 0}
+
 # Input fields
+
+
 BHK = st.number_input("Number of BHK", min_value=1, max_value=10, step=1)
 Location = st.number_input("Enter Area", min_value=100, max_value=10000, step=50)
 Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
@@ -45,10 +32,11 @@ if st.button("Predict Price"):
         "BHK": [BHK],
         "Location": [Location],
         "Bathroom": [Bathroom],
-        "Furnishing":[furnishing],
-        "Parking": [parking],
+        "Furnishing":[mapping_furnishing[furnishing]],
+        # "Parking": [parking],
+        "Parking": [mapping_parking[parking]],
         "Area_Yards": [Area_yards],
-        "Status" : [status]
+        "Status" : [mapping_status[status]]
         
     })
     
