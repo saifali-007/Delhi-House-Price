@@ -13,12 +13,19 @@ st.title("🏠 Delhi House Price Prediction")
 mapping_furnishing = {"Furnished": 2, "Semi-Furnished": 1, "Unfurnished": 0}
 mapping_parking = {"Yes": 1, "No": 0}
 mapping_status = {"Ready to move": 1, "Under construction": 0}
+mapping_location = {
+    'Dwarka': 0, 
+    'Saket': 1, 
+    'Rohini': 2, 
+    'Lajpat Nagar': 3, 
+    'Vasant Kunj': 4, 
+    'Karol Bagh': 5
+}
 
 # Input fields
 
 
 BHK = st.number_input("Number of BHK", min_value=1, max_value=10, step=1)
-# Location = st.number_input("Enter Location", min_value=100, max_value=10000, step=50)
 localities = ["Dwarka", "Saket", "Rohini", "Lajpat Nagar", "Vasant Kunj", "Karol Bagh"]
 Location = st.selectbox("Select Location", localities)
 Bathroom = st.number_input("Number of Bathrooms", min_value=1, max_value=10, step=1)
@@ -32,7 +39,7 @@ if st.button("Predict Price"):
     # Prepare input
     input_df = pd.DataFrame({
         "BHK": [BHK],
-        "Location": [Location],
+        "Location": [mapping_location[Location]],
         "Bathroom": [Bathroom],
         "Furnishing":[mapping_furnishing[furnishing]],
         # "Parking": [parking],
